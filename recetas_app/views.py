@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 from .models import Receta
-from .forms import ContactoForm
+from .forms import ContactoForm, RegistroForm, LoginForm, RecetaForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 
 # Página de inicio: muestra las últimas recetas
 def inicio(request):
@@ -34,3 +38,53 @@ def contacto(request):
 
 def confirmacion_contacto(request):
     return render(request, 'confirmacion_contacto.html')
+
+# Registro de usuarios
+def registro(request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('inicio')
+    else:
+        form = RegistroForm()
+    return render(request, 'registro.html', {'form': form})
+
+# Login
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                request,
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('inicio')
+            else:
+                form.add_error(None, 'Credenciales inválidas')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
+# Logout
+def logout_view(request):
+    logout(request)
+    return redirect('inicio')
+
+# Vista protegida: solo usuarios autenticados pueden crear recetas
+@login_required(login_url='login')
+def crear_receta(request):
+    if request.method == 'POST':
+        form = RecetaForm(request.POST, request.FILES)
+        if form.is_valid():
+            receta = form.save(commit=False)
+            receta.autor = request.user
+            receta.save()
+            return redirect('lista_recetas')
+    else:
+        form = RecetaForm()
+    return render(request, 'crear_receta.html', {'form': form})

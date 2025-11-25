@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <h2>Iniciar Sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <a href="{% url 'registro' %}" class="btn btn-secondary">Crear cuenta</a>
+    </form>
+</div>
+{% endblock %}
