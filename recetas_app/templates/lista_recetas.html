@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Recetas{% endblock %}
+{% block content %}
+<h2 class="mb-3">Todas las Recetas</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for receta in recetas %}
+    <div class="col">
+        <div class="card h-100">
+            {% if receta.imagen %}
+                <img src="{{ receta.imagen.url }}" class="card-img-top" alt="{{ receta.nombre }}">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Imagen por defecto">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ receta.nombre }}</h5>
+                <p class="card-text">{{ receta.instrucciones|truncatewords:15 }}</p>
+                <a href="{% url 'detalle_receta' receta.id %}" class="btn btn-primary">Ver Receta</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <p>No hay recetas disponibles.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
