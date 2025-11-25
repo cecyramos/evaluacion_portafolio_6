@@ -1,0 +1,7 @@
+•	Describir las características fundamentales del framework Django para el desarrollo de aplicaciones empresariales acorde al entorno Python.
+•	Realizar una investigación sobre las principales características de Django, sus ventajas para el desarrollo de aplicaciones empresariales y cómo facilita el desarrollo rápido y escalable en el entorno Python.
+Ejemplo: Comparación de Django con otros frameworks para aplicaciones empresariales.
+
+Respuesta:
+
+Django es un framework de alto nivel para Python que destaca en el desarrollo de aplicaciones empresariales por su arquitectura organizada, su seguridad integrada y su capacidad para escalar fácilmente. Gracias a su ORM, su sistema de migraciones y su panel de administración automático, facilita la creación rápida de aplicaciones robustas y bien estructuradas. Además, ofrece una extensa documentación, una comunidad activa y una integración sencilla con bases de datos y servicios empresariales. En comparación con otros frameworks como Flask o FastAPI, Django resulta más completo y adecuado para proyectos grandes, ya que incluye herramientas listas para usar que aceleran el desarrollo y reducen la necesidad de configurar componentes desde cero.
