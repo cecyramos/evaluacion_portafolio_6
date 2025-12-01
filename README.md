@@ -1,6 +1,8 @@
 # App de Recetas con Django
 
 Proyecto evaluacion de portafolio que demuestra las principales características de Django para el desarrollo de aplicaciones web empresariales. Basado en el trabajo grupal M6_AE3_ABPRO.
+<img width="1237" height="729" alt="index" src="https://github.com/user-attachments/assets/f9053edc-0a56-4097-9637-a88ce44b729e" />
+
 
 ---
 
